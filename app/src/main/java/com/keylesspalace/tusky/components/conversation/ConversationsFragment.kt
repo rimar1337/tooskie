@@ -51,11 +51,7 @@ import com.keylesspalace.tusky.interfaces.ActionButtonActivity
 import com.keylesspalace.tusky.interfaces.ReselectableFragment
 import com.keylesspalace.tusky.interfaces.StatusActionListener
 import com.keylesspalace.tusky.settings.PrefKeys
-import com.keylesspalace.tusky.util.CardViewMode
-import com.keylesspalace.tusky.util.StatusDisplayOptions
-import com.keylesspalace.tusky.util.hide
-import com.keylesspalace.tusky.util.show
-import com.keylesspalace.tusky.util.viewBinding
+import com.keylesspalace.tusky.util.*
 import com.keylesspalace.tusky.viewdata.AttachmentViewData
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.googlematerial.GoogleMaterial
@@ -245,7 +241,7 @@ class ConversationsFragment :
 
     private fun initSwipeToRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener { refreshContent() }
-        binding.swipeRefreshLayout.setColorSchemeResources(R.color.tusky_blue)
+        binding.swipeRefreshLayout.setColorSchemeColors(requireContext().getColorByAttribute(R.attr.colorPrimary))
     }
 
     override fun onReblog(reblog: Boolean, position: Int) {

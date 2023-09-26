@@ -62,13 +62,7 @@ import com.keylesspalace.tusky.interfaces.RefreshableFragment
 import com.keylesspalace.tusky.interfaces.ReselectableFragment
 import com.keylesspalace.tusky.interfaces.StatusActionListener
 import com.keylesspalace.tusky.settings.PrefKeys
-import com.keylesspalace.tusky.util.CardViewMode
-import com.keylesspalace.tusky.util.ListStatusAccessibilityDelegate
-import com.keylesspalace.tusky.util.StatusDisplayOptions
-import com.keylesspalace.tusky.util.hide
-import com.keylesspalace.tusky.util.show
-import com.keylesspalace.tusky.util.unsafeLazy
-import com.keylesspalace.tusky.util.viewBinding
+import com.keylesspalace.tusky.util.*
 import com.keylesspalace.tusky.viewdata.AttachmentViewData
 import com.keylesspalace.tusky.viewdata.StatusViewData
 import com.mikepenz.iconics.IconicsDrawable
@@ -373,7 +367,7 @@ class TimelineFragment :
     private fun setupSwipeRefreshLayout() {
         binding.swipeRefreshLayout.isEnabled = isSwipeToRefreshEnabled
         binding.swipeRefreshLayout.setOnRefreshListener(this)
-        binding.swipeRefreshLayout.setColorSchemeResources(R.color.tusky_blue)
+        binding.swipeRefreshLayout.setColorSchemeColors(requireContext().getColorByAttribute(R.attr.colorPrimary))
     }
 
     private fun setupRecyclerView() {

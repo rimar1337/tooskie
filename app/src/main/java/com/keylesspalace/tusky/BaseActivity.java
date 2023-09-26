@@ -24,6 +24,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -81,6 +82,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Injectab
         Log.d("activeTheme", theme);
         if (ThemeUtils.isBlack(getResources().getConfiguration(), theme)) {
             setTheme(R.style.TuskyBlackTheme);
+        } else if (Build.VERSION.SDK_INT >= 31 && theme.equals(ThemeUtils.THEME_MATERIAL_YOU_DARK)) {
+            setTheme(R.style.TuskyMaterialYouDarkTheme);
+        } else if (Build.VERSION.SDK_INT >= 31 && theme.equals(ThemeUtils.THEME_MATERIAL_YOU_LIGHT)) {
+            setTheme(R.style.TuskyMaterialYouLightTheme);
         }
 
         /* set the taskdescription programmatically, the theme would turn it blue */

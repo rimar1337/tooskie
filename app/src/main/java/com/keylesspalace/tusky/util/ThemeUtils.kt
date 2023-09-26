@@ -34,6 +34,8 @@ import com.google.android.material.color.MaterialColors
 const val THEME_NIGHT = "night"
 const val THEME_DAY = "day"
 const val THEME_BLACK = "black"
+const val THEME_MATERIAL_YOU_LIGHT = "material_you_light"
+const val THEME_MATERIAL_YOU_DARK = "material_you_dark"
 const val THEME_AUTO = "auto"
 const val THEME_SYSTEM = "auto_system"
 const val THEME_SYSTEM_BLACK = "auto_system_black"
@@ -54,10 +56,10 @@ fun setDrawableTint(context: Context, drawable: Drawable, @AttrRes attribute: In
 
 fun setAppNightMode(flavor: String?) {
     when (flavor) {
-        THEME_NIGHT, THEME_BLACK -> AppCompatDelegate.setDefaultNightMode(
+        THEME_NIGHT, THEME_BLACK, THEME_MATERIAL_YOU_DARK -> AppCompatDelegate.setDefaultNightMode(
             AppCompatDelegate.MODE_NIGHT_YES
         )
-        THEME_DAY -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        THEME_DAY, THEME_MATERIAL_YOU_LIGHT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         THEME_AUTO -> AppCompatDelegate.setDefaultNightMode(
             AppCompatDelegate.MODE_NIGHT_AUTO_TIME
         )

@@ -29,6 +29,7 @@ import com.keylesspalace.tusky.db.AccountManager
 import com.keylesspalace.tusky.entity.Status
 import com.keylesspalace.tusky.service.SendStatusService
 import com.keylesspalace.tusky.service.StatusToSend
+import com.keylesspalace.tusky.util.getColorByAttribute
 import com.keylesspalace.tusky.util.randomAlphanumericString
 import dagger.android.AndroidInjection
 import javax.inject.Inject
@@ -65,7 +66,7 @@ class SendStatusBroadcastReceiver : BroadcastReceiver() {
 
                 val builder = NotificationCompat.Builder(context, NotificationHelper.CHANNEL_MENTION + senderIdentifier)
                     .setSmallIcon(R.drawable.ic_notify)
-                    .setColor(context.getColor(R.color.tusky_blue))
+                    .setColor(context.getColorByAttribute(R.attr.colorPrimary))
                     .setGroup(senderFullName)
                     .setDefaults(0) // So it doesn't ring twice, notify only in Target callback
 

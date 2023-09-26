@@ -90,6 +90,7 @@ import com.keylesspalace.tusky.util.ListUtils;
 import com.keylesspalace.tusky.util.NotificationTypeConverterKt;
 import com.keylesspalace.tusky.util.PairedList;
 import com.keylesspalace.tusky.util.StatusDisplayOptions;
+import com.keylesspalace.tusky.util.ThemeKt;
 import com.keylesspalace.tusky.util.ViewDataUtils;
 import com.keylesspalace.tusky.view.EndlessOnScrollListener;
 import com.keylesspalace.tusky.viewdata.AttachmentViewData;
@@ -226,7 +227,7 @@ public class NotificationsFragment extends SFragment implements
 
         // Setup the SwipeRefreshLayout.
         binding.swipeRefreshLayout.setOnRefreshListener(this);
-        binding.swipeRefreshLayout.setColorSchemeResources(R.color.tusky_blue);
+        binding.swipeRefreshLayout.setColorSchemeColors(ThemeKt.getColorByAttribute(requireContext(), R.attr.colorPrimary));
 
         loadNotificationsFilter();
 
