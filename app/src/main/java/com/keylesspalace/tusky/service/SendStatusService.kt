@@ -36,6 +36,8 @@ import com.keylesspalace.tusky.entity.NewPoll
 import com.keylesspalace.tusky.entity.NewStatus
 import com.keylesspalace.tusky.entity.Status
 import com.keylesspalace.tusky.network.MastodonApi
+import com.keylesspalace.tusky.util.getColorByAttribute
+import com.keylesspalace.tusky.util.wrapInTheme
 import com.keylesspalace.tusky.util.unsafeLazy
 import dagger.android.AndroidInjection
 import kotlinx.coroutines.CoroutineScope
@@ -103,7 +105,7 @@ class SendStatusService : Service(), Injectable {
                 .setContentText(notificationText)
                 .setProgress(1, 0, true)
                 .setOngoing(true)
-                .setColor(getColor(R.color.notification_color))
+                .setColor(getColorByAttribute(R.attr.colorPrimary))
                 .addAction(0, getString(android.R.string.cancel), cancelSendingIntent(sendingNotificationId))
 
             if (statusesToSend.size == 0 || Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -392,7 +394,7 @@ class SendStatusService : Service(), Injectable {
             .setSmallIcon(R.drawable.ic_notify)
             .setContentTitle(getString(title))
             .setContentText(getString(content))
-            .setColor(getColor(R.color.notification_color))
+            .setColor(getColorByAttribute(R.attr.colorPrimary))
             .setAutoCancel(true)
             .setOngoing(false)
             .setContentIntent(pendingIntent)

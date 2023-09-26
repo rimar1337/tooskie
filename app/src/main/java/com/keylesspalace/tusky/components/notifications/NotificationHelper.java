@@ -63,6 +63,7 @@ import com.keylesspalace.tusky.entity.PollOption;
 import com.keylesspalace.tusky.entity.Status;
 import com.keylesspalace.tusky.receiver.SendStatusBroadcastReceiver;
 import com.keylesspalace.tusky.util.StringUtils;
+import com.keylesspalace.tusky.util.ThemeKt;
 import com.keylesspalace.tusky.viewdata.PollViewDataKt;
 import com.keylesspalace.tusky.worker.NotificationWorker;
 
@@ -335,7 +336,7 @@ public class NotificationHelper {
             NotificationCompat.Builder summaryBuilder = new NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.drawable.ic_notify)
                 .setContentIntent(summaryResultPendingIntent)
-                .setColor(context.getColor(R.color.notification_color))
+                .setColor(ThemeKt.getColorByAttribute(context, R.attr.colorPrimary))
                 .setAutoCancel(true)
                 .setShortcutId(Long.toString(account.getId()))
                 .setDefaults(0) // So it doesn't ring twice, notify only in Target callback
@@ -380,7 +381,7 @@ public class NotificationHelper {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.drawable.ic_notify)
                 .setContentIntent(eventResultPendingIntent)
-                .setColor(context.getColor(R.color.notification_color))
+                .setColor(ThemeKt.getColorByAttribute(context, R.attr.colorPrimary))
                 .setGroup(channelId)
                 .setAutoCancel(true)
                 .setShortcutId(Long.toString(account.getId()))
