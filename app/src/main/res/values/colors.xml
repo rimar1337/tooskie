@@ -11,6 +11,8 @@
     <color name="white">#fff</color>
     <color name="black">#000</color>
 
+    <color name="notification_color">@color/tusky_blue</color>
+
     <!-- the number roughly corresponds to the % lightness of the grey -->
     <color name="tusky_grey_05">#070b14</color>
     <color name="tusky_grey_10">#16191f</color>
@@ -19,11 +21,12 @@
     <color name="tusky_grey_30">#444b5d</color>
     <color name="tusky_grey_40">#596378</color>
     <color name="tusky_grey_50">#6e7b92</color>
-    <color name="tusky_grey_70">#9baec8</color>
-    <color name="tusky_grey_80">#b9c8d8</color>
-    <color name="tusky_grey_90">#d9e1e8</color>
-    <color name="tusky_grey_95">#ebeff4</color>
+    <color name="tusky_grey_70">#737780</color>
+    <color name="tusky_grey_80">#B3B3B3</color>
+    <color name="tusky_grey_90">#D7DBDB</color>
+    <color name="tusky_grey_95">#E0E0E0</color>
 
+    <color name="transparent_tusky_blue">#8c2b90d9</color>
     <color name="transparent_black">#8f000000</color>
     <color name="header_background_filter_dark">#44000000</color>
     <color name="header_background_filter_light">#66FFFFFF</color>
