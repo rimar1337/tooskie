@@ -37,7 +37,6 @@ import com.keylesspalace.tusky.entity.NewStatus
 import com.keylesspalace.tusky.entity.Status
 import com.keylesspalace.tusky.network.MastodonApi
 import com.keylesspalace.tusky.util.getColorByAttribute
-import com.keylesspalace.tusky.util.wrapInTheme
 import com.keylesspalace.tusky.util.unsafeLazy
 import dagger.android.AndroidInjection
 import kotlinx.coroutines.CoroutineScope
