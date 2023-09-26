@@ -98,9 +98,9 @@ import com.keylesspalace.tusky.pager.MainPagerAdapter
 import com.keylesspalace.tusky.settings.PrefKeys
 import com.keylesspalace.tusky.usecase.DeveloperToolsUseCase
 import com.keylesspalace.tusky.usecase.LogoutUsecase
+import com.keylesspalace.tusky.util.ThemeUtils
 import com.keylesspalace.tusky.util.deleteStaleCachedMedia
 import com.keylesspalace.tusky.util.emojify
-import com.keylesspalace.tusky.util.getDimension
 import com.keylesspalace.tusky.util.hide
 import com.keylesspalace.tusky.util.reduceSwipeSensitivity
 import com.keylesspalace.tusky.util.show
@@ -750,7 +750,7 @@ class MainActivity : BottomSheetActivity(), ActionButtonActivity, HasAndroidInje
 
     private fun setupTabs(selectNotificationTab: Boolean) {
         val activeTabLayout = if (preferences.getString(PrefKeys.MAIN_NAV_POSITION, "top") == "bottom") {
-            val actionBarSize = getDimension(this, androidx.appcompat.R.attr.actionBarSize)
+            val actionBarSize = ThemeUtils.getDimension(this, androidx.appcompat.R.attr.actionBarSize)
             val fabMargin = resources.getDimensionPixelSize(R.dimen.fabMargin)
             (binding.composeButton.layoutParams as CoordinatorLayout.LayoutParams).bottomMargin = actionBarSize + fabMargin
             binding.topNav.hide()

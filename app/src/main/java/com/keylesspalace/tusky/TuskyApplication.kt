@@ -29,10 +29,8 @@ import com.keylesspalace.tusky.settings.NEW_INSTALL_SCHEMA_VERSION
 import com.keylesspalace.tusky.settings.PrefKeys
 import com.keylesspalace.tusky.settings.PrefKeys.APP_THEME
 import com.keylesspalace.tusky.settings.SCHEMA_VERSION
-import com.keylesspalace.tusky.util.APP_THEME_DEFAULT
+import com.keylesspalace.tusky.util.ThemeUtils
 import com.keylesspalace.tusky.util.LocaleManager
-import com.keylesspalace.tusky.util.THEME_NIGHT
-import com.keylesspalace.tusky.util.setAppNightMode
 import com.keylesspalace.tusky.worker.PruneCacheWorker
 import com.keylesspalace.tusky.worker.WorkerFactory
 import dagger.android.DispatchingAndroidInjector
@@ -90,8 +88,8 @@ class TuskyApplication : Application(), HasAndroidInjector {
         EmojiPackHelper.init(this, DefaultEmojiPackList.get(this), allowPackImports = false)
 
         // init night mode
-        val theme = sharedPreferences.getString(APP_THEME, APP_THEME_DEFAULT)
-        setAppNightMode(theme)
+        val theme = sharedPreferences.getString(APP_THEME, ThemeUtils.APP_THEME_DEFAULT)
+        ThemeUtils.setAppNightMode(theme)
 
         localeManager.setLocale()
 
@@ -144,7 +142,7 @@ class TuskyApplication : Application(), HasAndroidInjector {
             // didn't have an explicit preference set use the previous default, so the
             // theme does not unexpectedly change.
             if (!sharedPreferences.contains(APP_THEME)) {
-                editor.putString(APP_THEME, THEME_NIGHT)
+                editor.putString(APP_THEME, ThemeUtils.THEME_NIGHT)
             }
         }
         editor.putInt(PrefKeys.SCHEMA_VERSION, newVersion)

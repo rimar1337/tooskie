@@ -51,7 +51,7 @@ import com.keylesspalace.tusky.databinding.ActivityTabPreferenceBinding
 import com.keylesspalace.tusky.di.Injectable
 import com.keylesspalace.tusky.entity.MastoList
 import com.keylesspalace.tusky.network.MastodonApi
-import com.keylesspalace.tusky.util.getDimension
+import com.keylesspalace.tusky.util.ThemeUtils
 import com.keylesspalace.tusky.util.hide
 import com.keylesspalace.tusky.util.show
 import com.keylesspalace.tusky.util.unsafeLazy
@@ -285,7 +285,7 @@ class TabPreferenceActivity : BaseActivity(), Injectable, ItemInteractionListene
         val statusLayout = LinearLayout(this)
         statusLayout.gravity = Gravity.CENTER
         val progress = ProgressBar(this)
-        val preferredPadding = getDimension(this, androidx.appcompat.R.attr.dialogPreferredPadding)
+        val preferredPadding = ThemeUtils.getDimension(this, androidx.appcompat.R.attr.dialogPreferredPadding)
         progress.setPadding(preferredPadding, 0, preferredPadding, 0)
         progress.visible(false)
 

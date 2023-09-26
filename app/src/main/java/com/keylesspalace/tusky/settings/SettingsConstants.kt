@@ -13,7 +13,8 @@ enum class AppTheme(val value: String) {
     AUTO_SYSTEM(ThemeUtils.THEME_SYSTEM);
 
     companion object {
-fun stringValues() = values().filter { Build.VERSION.SDK_INT >= 31 || (it != MATERIAL_YOU_DARK && it != MATERIAL_YOU_LIGHT) }.map { it.value }.toTypedArray()    }
+        fun stringValues() = values().filter { Build.VERSION.SDK_INT >= 31 || (it != MATERIAL_YOU_DARK && it != MATERIAL_YOU_LIGHT) }.map { it.value }.toTypedArray()
+    }
 }
 
 /**

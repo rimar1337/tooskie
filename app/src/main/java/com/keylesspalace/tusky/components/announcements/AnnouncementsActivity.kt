@@ -96,7 +96,7 @@ class AnnouncementsActivity :
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener(this::refreshAnnouncements)
-        binding.swipeRefreshLayout.setColorSchemeColors(view.context.getColorByAttribute(R.attr.colorPrimary))
+        binding.swipeRefreshLayout.setColorSchemeColors(getColorByAttribute(R.attr.colorPrimary))
 
         binding.announcementsList.setHasFixedSize(true)
         binding.announcementsList.layoutManager = LinearLayoutManager(this)

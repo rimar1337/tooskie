@@ -96,13 +96,9 @@ import com.keylesspalace.tusky.entity.NewPoll
 import com.keylesspalace.tusky.entity.Status
 import com.keylesspalace.tusky.settings.PrefKeys
 import com.keylesspalace.tusky.settings.PrefKeys.APP_THEME
-import com.keylesspalace.tusky.util.APP_THEME_DEFAULT
 import com.keylesspalace.tusky.util.MentionSpan
 import com.keylesspalace.tusky.util.PickMediaFiles
 import com.keylesspalace.tusky.util.ThemeUtils
-import com.keylesspalace.tusky.util.afterTextChanged
-import com.keylesspalace.tusky.util.combineLiveData
-import com.keylesspalace.tusky.util.combineOptionalLiveData
 import com.keylesspalace.tusky.util.getColorByAttribute
 import com.keylesspalace.tusky.util.getInitialLanguages
 import com.keylesspalace.tusky.util.getLocaleList
@@ -111,13 +107,10 @@ import com.keylesspalace.tusky.util.hide
 import com.keylesspalace.tusky.util.highlightSpans
 import com.keylesspalace.tusky.util.loadAvatar
 import com.keylesspalace.tusky.util.modernLanguageCode
-import com.keylesspalace.tusky.util.onTextChanged
-import com.keylesspalace.tusky.util.setDrawableTint
 import com.keylesspalace.tusky.util.show
 import com.keylesspalace.tusky.util.unsafeLazy
 import com.keylesspalace.tusky.util.viewBinding
 import com.keylesspalace.tusky.util.visible
-import com.keylesspalace.tusky.util.withLifecycleContext
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.googlematerial.GoogleMaterial
 import com.mikepenz.iconics.utils.colorInt
@@ -217,7 +210,7 @@ class ComposeActivity :
 
         activeAccount = accountManager.activeAccount ?: return
 
-        val theme = preferences.getString(APP_THEME, APP_THEME_DEFAULT)
+        val theme = preferences.getString(APP_THEME, ThemeUtils.APP_THEME_DEFAULT)
         if (theme == ThemeUtils.THEME_BLACK) {
             setTheme(R.style.TuskyDialogActivityBlackTheme)
         } else if (Build.VERSION.SDK_INT >= 31 && theme == ThemeUtils.THEME_MATERIAL_YOU_DARK) {
@@ -354,7 +347,7 @@ class ComposeActivity :
             binding.composeReplyView.text = getString(R.string.replying_to, replyingStatusAuthor)
             val arrowDownIcon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_arrow_drop_down).apply { sizeDp = 12 }
 
-            setDrawableTint(this, arrowDownIcon, android.R.attr.textColorTertiary)
+            ThemeUtils.setDrawableTint(this, arrowDownIcon, android.R.attr.textColorTertiary)
             binding.composeReplyView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, arrowDownIcon, null)
 
             binding.composeReplyView.setOnClickListener {
@@ -367,7 +360,7 @@ class ComposeActivity :
                     binding.composeReplyContentView.show()
                     val arrowUpIcon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_arrow_drop_up).apply { sizeDp = 12 }
 
-                    setDrawableTint(this, arrowUpIcon, android.R.attr.textColorTertiary)
+                    ThemeUtils.setDrawableTint(this, arrowUpIcon, android.R.attr.textColorTertiary)
                     binding.composeReplyView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, arrowUpIcon, null)
                 }
             }
@@ -1020,7 +1013,7 @@ class ComposeActivity :
 
     private fun enableButton(button: ImageButton, clickable: Boolean, colorActive: Boolean) {
         button.isEnabled = clickable
-        setDrawableTint(
+        ThemeUtils.setDrawableTint(
             this,
             button.drawable,
             if (colorActive) {

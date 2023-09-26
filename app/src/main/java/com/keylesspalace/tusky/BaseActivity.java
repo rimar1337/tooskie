@@ -80,7 +80,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Injectab
          * views are created. */
         String theme = preferences.getString(APP_THEME, ThemeUtils.APP_THEME_DEFAULT);
         Log.d("activeTheme", theme);
-        if (ThemeUtils.isBlack(getResources().getConfiguration(), theme)) {
+        if (theme.equals(ThemeUtils.THEME_BLACK)) {
             setTheme(R.style.TuskyBlackTheme);
         } else if (Build.VERSION.SDK_INT >= 31 && theme.equals(ThemeUtils.THEME_MATERIAL_YOU_DARK)) {
             setTheme(R.style.TuskyMaterialYouDarkTheme);

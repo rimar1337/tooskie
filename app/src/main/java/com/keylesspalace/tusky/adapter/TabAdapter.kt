@@ -30,7 +30,7 @@ import com.keylesspalace.tusky.databinding.ItemTabPreferenceBinding
 import com.keylesspalace.tusky.databinding.ItemTabPreferenceSmallBinding
 import com.keylesspalace.tusky.util.BindingHolder
 import com.keylesspalace.tusky.util.hide
-import com.keylesspalace.tusky.util.setDrawableTint
+import com.keylesspalace.tusky.util.ThemeUtils
 import com.keylesspalace.tusky.util.show
 
 interface ItemInteractionListener {
@@ -100,7 +100,7 @@ class TabAdapter(
                 listener.onTabRemoved(holder.bindingAdapterPosition)
             }
             binding.removeButton.isEnabled = removeButtonEnabled
-            setDrawableTint(
+            ThemeUtils.setDrawableTint(
                 holder.itemView.context,
                 binding.removeButton.drawable,
                 (if (removeButtonEnabled) android.R.attr.textColorTertiary else R.attr.textColorDisabled)
