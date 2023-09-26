@@ -1,5 +1,13 @@
-[![Translate - with Weblate](https://img.shields.io/badge/translate%20with-Weblate-green.svg?style=flat)](https://weblate.tusky.app/) [![OpenCollective](https://opencollective.com/tusky/backers/badge.svg)](https://opencollective.com/tusky/) [![Build Status](https://app.bitrise.io/app/a3e773c3c57a894c/status.svg?token=qLu_Ti4Gp2LWcYT4eo2INQ&branch=develop)](https://app.bitrise.io/app/a3e773c3c57a894c) 
+# Tooskie
+This is a fork of tusky with opinionated changes.
+- Elk-styled pfps
+- Rounded pfps
+- Smaller padding all around
+- Rebased and merged pull request #2619
+
+-----------
 # Tusky
+[![Translate - with Weblate](https://img.shields.io/badge/translate%20with-Weblate-green.svg?style=flat)](https://weblate.tusky.app/) [![OpenCollective](https://opencollective.com/tusky/backers/badge.svg)](https://opencollective.com/tusky/) [![Build Status](https://app.bitrise.io/app/a3e773c3c57a894c/status.svg?token=qLu_Ti4Gp2LWcYT4eo2INQ&branch=develop)](https://app.bitrise.io/app/a3e773c3c57a894c) 
 
 <img src="/fastlane/metadata/android/en-US/images/icon.png" width="120" height="120"/>
 
