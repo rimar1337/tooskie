@@ -26,14 +26,12 @@ class CacheUpdater @Inject constructor(
             eventHub.events.collect { event ->
                 val accountId = accountManager.activeAccount?.id ?: return@collect
                 when (event) {
-                    is StatusChangedEvent -> {
-                        val status = event.status
-                        timelineDao.update(
-                            accountId = accountId,
-                            status = status,
-                            gson = gson
-                        )
-                    }
+                    is FavoriteEvent ->
+                        timelineDao.setFavourited(accountId, event.statusId, event.favourite)
+                    is ReblogEvent ->
+                        timelineDao.setReblogged(accountId, event.statusId, event.reblog)
+                    is BookmarkEvent ->
+                        timelineDao.setBookmarked(accountId, event.statusId, event.bookmark)
                     is UnfollowEvent ->
                         timelineDao.removeAllByUser(accountId, event.accountId)
                     is StatusDeletedEvent ->
@@ -42,6 +40,8 @@ class CacheUpdater @Inject constructor(
                         val pollString = gson.toJson(event.poll)
                         timelineDao.setVoted(accountId, event.statusId, pollString)
                     }
+                    is PinEvent ->
+                        timelineDao.setPinned(accountId, event.statusId, event.pinned)
                 }
             }
         }

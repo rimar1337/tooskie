@@ -23,10 +23,14 @@ import at.connyduck.calladapter.networkresult.getOrElse
 import at.connyduck.calladapter.networkresult.getOrThrow
 import com.google.gson.Gson
 import com.keylesspalace.tusky.appstore.BlockEvent
+import com.keylesspalace.tusky.appstore.BookmarkEvent
 import com.keylesspalace.tusky.appstore.EventHub
-import com.keylesspalace.tusky.appstore.StatusChangedEvent
+import com.keylesspalace.tusky.appstore.FavoriteEvent
+import com.keylesspalace.tusky.appstore.PinEvent
+import com.keylesspalace.tusky.appstore.ReblogEvent
 import com.keylesspalace.tusky.appstore.StatusComposedEvent
 import com.keylesspalace.tusky.appstore.StatusDeletedEvent
+import com.keylesspalace.tusky.appstore.StatusEditedEvent
 import com.keylesspalace.tusky.components.timeline.toViewData
 import com.keylesspalace.tusky.components.timeline.util.ifExpected
 import com.keylesspalace.tusky.db.AccountManager
@@ -55,7 +59,7 @@ class ViewThreadViewModel @Inject constructor(
     private val filterModel: FilterModel,
     private val timelineCases: TimelineCases,
     eventHub: EventHub,
-    private val accountManager: AccountManager,
+    accountManager: AccountManager,
     private val db: AppDatabase,
     private val gson: Gson
 ) : ViewModel() {
@@ -82,10 +86,14 @@ class ViewThreadViewModel @Inject constructor(
             eventHub.events
                 .collect { event ->
                     when (event) {
-                        is StatusChangedEvent -> handleStatusChangedEvent(event.status)
+                        is FavoriteEvent -> handleFavEvent(event)
+                        is ReblogEvent -> handleReblogEvent(event)
+                        is BookmarkEvent -> handleBookmarkEvent(event)
+                        is PinEvent -> handlePinEvent(event)
                         is BlockEvent -> removeAllByAccountId(event.accountId)
                         is StatusComposedEvent -> handleStatusComposedEvent(event)
                         is StatusDeletedEvent -> handleStatusDeletedEvent(event)
+                        is StatusEditedEvent -> handleStatusEditedEvent(event)
                     }
                 }
         }
@@ -99,7 +107,7 @@ class ViewThreadViewModel @Inject constructor(
         viewModelScope.launch {
             Log.d(TAG, "Finding status with: $id")
             val contextCall = async { api.statusContext(id) }
-            val timelineStatus = db.timelineDao().getStatus(accountManager.activeAccount!!.id, id)
+            val timelineStatus = db.timelineDao().getStatus(id)
 
             var detailedStatus = if (timelineStatus != null) {
                 Log.d(TAG, "Loaded status from local timeline")
@@ -136,14 +144,8 @@ class ViewThreadViewModel @Inject constructor(
             // for the status. Ignore errors, the user still has a functioning UI if the fetch
             // failed.
             if (timelineStatus != null) {
-                api.status(id).getOrNull()?.let { result ->
-                    db.timelineDao().update(
-                        accountId = accountManager.activeAccount!!.id,
-                        status = result,
-                        gson = gson
-                    )
-                    detailedStatus = result.toViewData(isDetailed = true)
-                }
+                val viewData = api.status(id).getOrNull()?.toViewData(isDetailed = true)
+                if (viewData != null) { detailedStatus = viewData }
             }
 
             val contextResult = contextCall.await()
@@ -275,14 +277,27 @@ class ViewThreadViewModel @Inject constructor(
         }
     }
 
-    private fun handleStatusChangedEvent(status: Status) {
-        updateStatusViewData(status.id) { viewData ->
-            status.toViewData(
-                isShowingContent = viewData.isShowingContent,
-                isExpanded = viewData.isExpanded,
-                isCollapsed = viewData.isCollapsed,
-                isDetailed = viewData.isDetailed
-            )
+    private fun handleFavEvent(event: FavoriteEvent) {
+        updateStatus(event.statusId) { status ->
+            status.copy(favourited = event.favourite)
+        }
+    }
+
+    private fun handleReblogEvent(event: ReblogEvent) {
+        updateStatus(event.statusId) { status ->
+            status.copy(reblogged = event.reblog)
+        }
+    }
+
+    private fun handleBookmarkEvent(event: BookmarkEvent) {
+        updateStatus(event.statusId) { status ->
+            status.copy(bookmarked = event.bookmark)
+        }
+    }
+
+    private fun handlePinEvent(event: PinEvent) {
+        updateStatus(event.statusId) { status ->
+            status.copy(pinned = event.pinned)
         }
     }
 
@@ -311,6 +326,20 @@ class ViewThreadViewModel @Inject constructor(
             } else {
                 uiState
             }
+        }
+    }
+
+    private fun handleStatusEditedEvent(event: StatusEditedEvent) {
+        updateSuccess { uiState ->
+            uiState.copy(
+                statusViewData = uiState.statusViewData.map { status ->
+                    if (status.actionableId == event.originalId) {
+                        event.status.toViewData()
+                    } else {
+                        status
+                    }
+                }
+            )
         }
     }
 
