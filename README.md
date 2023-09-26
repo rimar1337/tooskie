@@ -1,9 +1,9 @@
 # Tooskie
-This is a fork of tusky with opinionated changes.
+This is my personal fork of tusky with opinionated changes.
 - Elk-styled pfps
 - Rounded pfps
 - Smaller padding all around
-- Rebased and merged pull request #2619
+- Rebased and merged pull request #2619 (Material You colors)
 
 -----------
 # Tusky
