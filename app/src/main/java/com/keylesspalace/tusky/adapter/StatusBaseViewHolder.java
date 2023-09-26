@@ -325,7 +325,7 @@ public abstract class StatusBaseViewHolder extends RecyclerView.ViewHolder {
 
         } else {
             int padding = Utils.dpToPx(avatar.getContext(), 12);
-            avatar.setPaddingRelative(0, 0, padding, padding);
+            avatar.setPaddingRelative(0, 0, 0, 0);
 
             avatarInset.setVisibility(View.VISIBLE);
             avatarInset.setBackground(null);
