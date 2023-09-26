@@ -8,5 +8,4 @@ build
 .externalNativeBuild
 app/release
 app-release.apk
-app/green/release/output-metadata.json
-app/green/release/Tusky_23.0-fcfe19a6_113_fcfe19a6_green_release.apk
+app/green/release/
