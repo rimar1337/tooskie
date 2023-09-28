@@ -43,10 +43,10 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/accountHeaderInfoContainer"
-                    android:background="?android:windowBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="180dp"
+                    android:background="?attr/colorSurface"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp">
 
@@ -465,7 +465,7 @@
                 style="@style/TuskyTabAppearance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:windowBackground"
+                android:background="?attr/colorSurface"
                 app:tabGravity="center"
                 app:tabMode="scrollable" />
 
